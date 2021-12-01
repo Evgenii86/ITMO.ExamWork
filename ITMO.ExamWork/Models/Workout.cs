@@ -77,6 +77,5 @@ namespace ITMO.ExamWork.Models
                 PropertyChanged(this, new PropertyChangedEventArgs(prop));
         }
 
-
     }
 }

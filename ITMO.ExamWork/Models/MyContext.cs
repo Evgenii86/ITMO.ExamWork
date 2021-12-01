@@ -24,7 +24,7 @@ namespace ITMO.ExamWork.Models
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=FitnessDB;Trusted_Connection=True;");
+            optionsBuilder.UseSqlServer("Server=MOJ-PK\\SQLEXPRESS;Database=FitnessDB;Trusted_Connection=True;");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

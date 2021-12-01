@@ -104,11 +104,13 @@ namespace ITMO.ExamWork
             Workout w = new Workout();
             try
             {
+                int WorkoutHour = Convert.ToInt32(WorkoutHourBox.Text);
+                int WorkoutMinute = Convert.ToInt32(WorkoutMinuteBox.Text);
                 w.CustomerCardId = Convert.ToInt32(WorkoutClientCardBox.Text);
                 w.TypeOfTrainingId = Convert.ToInt32(WorkoutTypeBox.Text);
                 w.CoachId = Convert.ToInt32(WorkoutCoachIDBox.Text);
                 w.RoomId = Convert.ToInt32(WorkoutRoomIDBox.Text);
-                w.DateOfWorkout = WorkoutDatePicker.SelectedDate;
+                w.DateOfWorkout = new DateTime(WorkoutDatePicker.SelectedDate.Value.Year, WorkoutDatePicker.SelectedDate.Value.Month, WorkoutDatePicker.SelectedDate.Value.Day, WorkoutHour, WorkoutMinute, 0);
                 db.Workouts.Add(w);
                 db.SaveChanges();
             }
@@ -122,7 +124,11 @@ namespace ITMO.ExamWork
             {
                 MessageBox.Show("Формат вводимых данных не корректен. Проверьте данные и исправьте");
             }
-            
+            catch (ArgumentOutOfRangeException)
+            {
+                MessageBox.Show("Формат введенной даты не корректен. Проверьте данные и исправьте");
+            }
+
         }
         private void SubscriptionCreateButton_Click(object sender, RoutedEventArgs e)
         {
@@ -259,12 +265,14 @@ namespace ITMO.ExamWork
             {
                 try
                 {
+                    int WorkoutHour = Convert.ToInt32(WorkoutHourBox.Text);
+                    int WorkoutMinute = Convert.ToInt32(WorkoutMinuteBox.Text);
                     Workout workout = workoutsListView.SelectedItem as Workout;
                     workout.CustomerCardId = Convert.ToInt32(WorkoutClientCardBox.Text);
                     workout.TypeOfTrainingId = Convert.ToInt32(WorkoutTypeBox.Text);
                     workout.CoachId = Convert.ToInt32(WorkoutCoachIDBox.Text);
                     workout.RoomId = Convert.ToInt32(WorkoutRoomIDBox.Text);
-                    workout.DateOfWorkout = WorkoutDatePicker.SelectedDate;
+                    workout.DateOfWorkout = new DateTime(WorkoutDatePicker.SelectedDate.Value.Year, WorkoutDatePicker.SelectedDate.Value.Month, WorkoutDatePicker.SelectedDate.Value.Day, WorkoutHour, WorkoutMinute, 0);
                     db.SaveChanges();
                 }
                 catch (DbUpdateException)
@@ -275,6 +283,10 @@ namespace ITMO.ExamWork
                 catch (FormatException)
                 {
                     MessageBox.Show("Формат вводимых данных не корректен. Проверьте данные и исправьте");
+                }
+                catch (ArgumentOutOfRangeException)
+                {
+                    MessageBox.Show("Формат введенной даты не корректен. Проверьте данные и исправьте");
                 }
             }
             
@@ -399,6 +411,8 @@ namespace ITMO.ExamWork
                 WorkoutCoachIDBox.Text = "";
                 WorkoutRoomIDBox.Text = "";
                 WorkoutDatePicker.SelectedDate = DateTime.Now;
+                WorkoutHourBox.Text = "";
+                WorkoutMinuteBox.Text = "";
                 db.SaveChanges();
             }
             
@@ -487,6 +501,9 @@ namespace ITMO.ExamWork
                 WorkoutCoachIDBox.Text = workout2.CoachId.ToString();
                 WorkoutRoomIDBox.Text = workout2.RoomId.ToString();
                 WorkoutDatePicker.SelectedDate = workout2.DateOfWorkout;
+                WorkoutHourBox.Text = workout2.DateOfWorkout.Value.Hour.ToString();
+                WorkoutMinuteBox.Text = workout2.DateOfWorkout.Value.Minute.ToString();
+
             }
         }
         private void subscriptionListView_selected(object sender, SelectionChangedEventArgs e)

@@ -387,8 +387,26 @@
                             </TextBox>
                         </Grid>
 
-                        <TextBlock FontSize="14" HorizontalAlignment="Center" Foreground="DarkSlateGray" FontWeight="Medium">Укажите дату тренировки</TextBlock>
+                        <TextBlock FontSize="10" HorizontalAlignment="Center" Foreground="DarkSlateGray" FontWeight="Medium">Укажите дату и время тренировки</TextBlock>
                         <DatePicker Name="WorkoutDatePicker" IsDropDownOpen="False"  SelectedDateFormat="Short"  FirstDayOfWeek="Monday" Width="300" />
+                        <Grid DataContext="{StaticResource ValWorkout}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="1.5*" />
+                            </Grid.ColumnDefinitions>
+                            <Label Grid.Column="0" Foreground="DarkSlateGray" FontSize="10">Введите час</Label>
+                            <TextBox Name="WorkoutHourBox" Grid.Column="1" MaxLength="50" HorizontalAlignment="Center" FontSize="10" Margin="5" Width="100">
+                            </TextBox>
+                        </Grid>
+                        <Grid DataContext="{StaticResource ValWorkout}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="1.5*" />
+                            </Grid.ColumnDefinitions>
+                            <Label Grid.Column="0" Foreground="DarkSlateGray" FontSize="10">Введите минуты</Label>
+                            <TextBox Name="WorkoutMinuteBox" Grid.Column="1" MaxLength="50" HorizontalAlignment="Center" FontSize="10" Margin="5" Width="100">
+                            </TextBox>
+                        </Grid>
                     </StackPanel>
                     <ListView Name="workoutsListView" Grid.Row="1" Grid.Column="1" Background="Chocolate"  SelectionChanged="workoutListView_selected" >
                         <ListView.View>
